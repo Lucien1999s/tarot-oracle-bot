@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/demo/banner.png" alt="Tarot Oracle Bot Banner" width="100%">
+</p>
+
 # 🔮 Tarot Oracle Bot
 
 **Tarot Oracle Bot** is an AI × Tarot project that blends the timeless **Rider–Waite–Smith (RWS)** tarot system with modern **Large Language Models (LLMs)**.
