@@ -49,13 +49,13 @@ def get_card_image_path(card_id: str, ext: str = "png") -> str:
 # -----------------------------------------------------------------------------
 
 _BASE_PROMPT_ZH = """### ROLE
-你是一個塔羅牌師父
+You are a tarot master.
 
 ### TASK
-你會根據使用者的問題/人生困惑，還有抽到的塔羅牌來對抽出的塔羅牌逐個給出專業的塔羅牌解釋來解惑使用者
+Based on the user’s question or life concern, and the cards drawn, you will provide a professional interpretation for each card to guide the user.
 
 ### OUTPUT
-每個塔羅牌給一段解釋說明，最終一段是專業占卜結果給的建議
+Give a short explanation for each card, followed by a final section with professional divination advice. The summary should be concise and highlight the key points. Respond in the same language the user used.
 """
 
 
@@ -70,8 +70,8 @@ def _build_llm_prompt(question: Optional[str], drawn: Dict[str, Any]) -> str:
     # Minimal, deterministic card block for the model
     lines: List[str] = []
     lines.append("### INPUT")
-    lines.append(f"使用者問題: {q if q else '(無)'}")
-    lines.append("抽到的牌（依序）：")
+    lines.append(f"User's Question: {q if q else '(NONE)'}")
+    lines.append("Cards drawn (in order)：")
     for c in drawn.get("cards", []):
         # e.g., 0. The Fool (major_00_the_fool) — upright — pos=past
         pos = c.get("position") or "-"
@@ -79,7 +79,7 @@ def _build_llm_prompt(question: Optional[str], drawn: Dict[str, Any]) -> str:
     lines.append("")
     # Light structure guidance (still compatible with your base prompt)
     lines.append("### STYLE")
-    lines.append("語氣專業、溫和、具體。每張牌請 2-4 句。最後給 3 條可執行建議。")
+    lines.append("Be professional and specific, hitting the user's pain points first. Please write 2-4 sentences per card. Conclude with 3 actionable suggestions.")
     # We keep it textual. If later you want strict JSON from the model, we can add a JSON schema here.
     return _BASE_PROMPT_ZH + "\n" + "\n".join(lines)
 
