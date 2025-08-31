@@ -79,7 +79,7 @@ def _build_llm_prompt(question: Optional[str], drawn: Dict[str, Any]) -> str:
     lines.append("")
     # Light structure guidance (still compatible with your base prompt)
     lines.append("### STYLE")
-    lines.append("Be professional and specific, hitting the user's pain points first. Please write 2-4 sentences per card. Conclude with 3 actionable suggestions.")
+    lines.append("Be professional and specific, hitting the user's pain points first. Please write 2-4 sentences per card. Finally, answer the questions subjectively and give three concise action suggestions")
     # We keep it textual. If later you want strict JSON from the model, we can add a JSON schema here.
     return _BASE_PROMPT_ZH + "\n" + "\n".join(lines)
 
