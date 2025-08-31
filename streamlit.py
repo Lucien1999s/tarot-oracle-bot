@@ -180,7 +180,8 @@ if result:
                     chosen_path = p2
 
                 if chosen_path:
-                    col.image(chosen_path, caption=caption, use_column_width=True)
+                    # col.image(chosen_path, caption=caption, use_container_width=True)
+                    col.image(chosen_path, caption=caption, width="stretch")
                     if show_paths:
                         col.caption(f"✓ {chosen_path}")
                 else:
