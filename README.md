@@ -42,6 +42,42 @@ Whether you’re curious about your past, present, and future, or just want to s
 
 ---
 
+## 🐳 Run with Docker
+
+You can also run the Tarot Oracle Bot as an API service inside Docker.
+
+1. **Build the image**
+
+    ```bash
+    docker build -t tarot-oracle-bot:api .
+    ```
+
+2. **Run the container**
+
+    ```bash
+    docker run --name tarot-api \
+        -p 8000:8000 \
+        --env-file .env \
+        -v "$(pwd)/assets/cards:/app/assets/cards:ro" \
+        tarot-oracle-bot:api
+    ```
+
+3. **Access the API**
+
+    Once running, open:
+
+    - Swagger UI → http://localhost:8000/docs
+    - ReDoc → http://localhost:8000/redoc
+
+    Example endpoint:
+
+    ```bash
+    curl -X POST "http://localhost:8000/reading" \
+        -H "Content-Type: application/json" \
+        -d '{"num_cards":3, "spread":"three_card", "question":"Should I change my career?", "explain_with_llm":true}'
+    ```
+---
+
 ## 📖 Demo Walkthrough
 
 ### 1. Choose how many cards to draw
